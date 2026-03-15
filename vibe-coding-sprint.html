@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Five Mindsets Vibe Coding Sprint — McKay Consulting</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─────────────────────────────────────
+       DESIGN TOKENS
+    ───────────────────────────────────── */
+    :root {
+      --bg:          #1a1a18;
+      --text:        #f0ece2;
+      --text-dim:    rgba(240, 236, 226, 0.52);
+      --text-muted:  rgba(240, 236, 226, 0.28);
+      --accent:      #9c8b60;
+      --rule:        rgba(240, 236, 226, 0.09);
+
+      --font-serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --font-mono:   'DM Mono', 'Courier New', monospace;
+
+      --max-w: 680px;
+      --pad-x: clamp(24px, 7vw, 80px);
+      --pad-y: clamp(80px, 13vh, 148px);
+    }
+
+    /* ─────────────────────────────────────
+       RESET
+    ───────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    /* ─────────────────────────────────────
+       BASE
+    ───────────────────────────────────── */
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-serif);
+      font-weight: 300;
+      line-height: 1.92;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────────────
+       GRAIN / TEXTURE OVERLAY
+    ───────────────────────────────────── */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.038;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ─────────────────────────────────────
+       LAYOUT
+    ───────────────────────────────────── */
+    .wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: var(--pad-y) var(--pad-x);
+    }
+
+    /* ─────────────────────────────────────
+       HEADER — initial CSS animation
+    ───────────────────────────────────── */
+    .page-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      font-weight: 300;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 3rem;
+      animation: hdr-fade 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    }
+
+    .page-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(2.8rem, 7.5vw, 5.2rem);
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      margin-bottom: 1.1rem;
+      animation: hdr-fade 1.8s 0.12s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    }
+
+    .page-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.05rem, 2.8vw, 1.35rem);
+      color: var(--text-dim);
+      margin-bottom: 7rem;
+      animation: hdr-fade 1.8s 0.26s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+      line-height: 1.5;
+    }
+
+    @keyframes hdr-fade {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─────────────────────────────────────
+       PROSE
+    ───────────────────────────────────── */
+    p {
+      font-size: clamp(1.05rem, 2.1vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.92;
+      color: var(--text);
+      margin-bottom: 1.65em;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* ─────────────────────────────────────
+       SECTION LABELS  (DM Mono caps)
+    ───────────────────────────────────── */
+    .s-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.8rem;
+    }
+
+    /* ─────────────────────────────────────
+       SECTION SPACING
+    ───────────────────────────────────── */
+    .section {
+      margin-bottom: 5.5rem;
+    }
+
+    /* ─────────────────────────────────────
+       THE SINGLE HR DIVIDER
+    ───────────────────────────────────── */
+    .rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 5.5rem 0;
+    }
+
+    /* ─────────────────────────────────────
+       DAYS
+    ───────────────────────────────────── */
+    .days-intro {
+      margin-bottom: 3.5rem;
+    }
+
+    .day {
+      margin-bottom: 4.2rem;
+      padding-bottom: 4.2rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .day:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .day-num {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.55rem;
+    }
+
+    .day-name {
+      display: block;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(1.15rem, 2.8vw, 1.52rem);
+      line-height: 1.28;
+      color: var(--text);
+      margin-bottom: 1.4rem;
+      letter-spacing: 0.01em;
+    }
+
+    /* ─────────────────────────────────────
+       DAY DETAIL ROWS
+    ───────────────────────────────────── */
+    .day-row {
+      display: grid;
+      grid-template-columns: 5.8rem 1fr;
+      gap: 0 1.4rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .day-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .row-key {
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding-top: 0.22em;
+      line-height: 1.7;
+    }
+
+    .row-val {
+      font-family: var(--font-serif);
+      font-size: clamp(1rem, 1.9vw, 1.1rem);
+      font-weight: 300;
+      color: var(--text-dim);
+      line-height: 1.88;
+    }
+
+    .row-val em {
+      font-style: italic;
+      color: var(--text);
+    }
+
+    /* ─────────────────────────────────────
+       CLOSING QUOTE
+    ───────────────────────────────────── */
+    .closing-quote {
+      display: block;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.25rem, 3.2vw, 1.95rem);
+      line-height: 1.52;
+      color: var(--text);
+      text-align: center;
+      padding: 4.5rem 1rem;
+      letter-spacing: 0.01em;
+      position: relative;
+    }
+
+    .closing-quote::before,
+    .closing-quote::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: var(--accent);
+      margin: 1.8rem auto;
+      opacity: 0.45;
+    }
+
+    /* ─────────────────────────────────────
+       CONTACT
+    ───────────────────────────────────── */
+    .contact-body {
+      margin-top: 0.5rem;
+    }
+
+    .contact-body p {
+      font-size: clamp(0.95rem, 1.9vw, 1.08rem);
+      color: var(--text-dim);
+      line-height: 1.85;
+    }
+
+    .mail-link {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(240, 236, 226, 0.18);
+      transition: border-color 0.4s ease;
+    }
+
+    .mail-link:hover {
+      border-color: var(--accent);
+    }
+
+    /* ─────────────────────────────────────
+       SCROLL FADE-IN
+    ───────────────────────────────────── */
+    .fi {
+      opacity: 0;
+      transform: translateY(26px);
+      transition:
+        opacity  1.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+        transform 1.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .fi.on {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .day.fi:nth-child(1) { transition-delay: 0s; }
+    .day.fi:nth-child(2) { transition-delay: 0.06s; }
+    .day.fi:nth-child(3) { transition-delay: 0.12s; }
+    .day.fi:nth-child(4) { transition-delay: 0.18s; }
+    .day.fi:nth-child(5) { transition-delay: 0.24s; }
+
+    /* ─────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────── */
+    @media (max-width: 580px) {
+      .page-subtitle { margin-bottom: 5rem; }
+      .section       { margin-bottom: 4rem; }
+      .closing-quote { padding: 3rem 0; }
+      .day-row {
+        grid-template-columns: 1fr;
+        gap: 0.2rem 0;
+        margin-bottom: 1.1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="wrap">
+
+    <!-- ── HEADER ───────────────────────────────── -->
+    <span class="page-label">Intensive &middot; Five Days</span>
+    <h1 class="page-title">The Five<br>Mindsets Vibe<br>Coding Sprint</h1>
+    <p class="page-subtitle">5 Days. One Wicked Problem. Real Code.</p>
+
+
+    <!-- ── THE CONDITION ────────────────────────── -->
+    <section class="section fi">
+      <p>In the AI Crucible, the traditional model of Plan-then-Build is a structural risk. Most organisations are amnesiac &mdash; they plan for months but fail to learn from what they ship.</p>
+
+      <p>The Vibe Coding Sprint flips this by applying the PAK Model: Practice &rarr; Application &rarr; Knowledge. We don&rsquo;t teach you to be innovative; we steady the bicycle while you find your balance on a real, high-stakes problem.</p>
+    </section>
+
+
+    <!-- ── THE FIVE DAYS ─────────────────────────── -->
+    <section class="section">
+      <span class="s-label fi">The Five Days</span>
+
+      <p class="days-intro fi">Each day applies one of the Five Mindsets to a live challenge inside your organisation. The work is cumulative &mdash; each day builds the conditions for the next.</p>
+
+      <div>
+
+        <div class="day fi">
+          <span class="day-num">Day 1</span>
+          <span class="day-name">Radical Empathy &amp; Worldview Witnessing</span>
+          <div class="day-row">
+            <span class="row-key">Mindset</span>
+            <span class="row-val">Move from <em>&ldquo;what customers say&rdquo;</em> to <em>&ldquo;what customers do&rdquo;</em>.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">Activity</span>
+            <span class="row-val">The Product Trio &mdash; Product, Design, Engineering &mdash; enters the user&rsquo;s environment for in-field interviews and radical witnessing.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">Goal</span>
+            <span class="row-val">To understand the customer&rsquo;s worldview, values, and unspoken constraints &mdash; not just their feature requests.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">The Shift</span>
+            <span class="row-val">Moving beyond proxied understanding to a direct claim on the truth of the customer&rsquo;s daily reality.</span>
+          </div>
+        </div>
+
+        <div class="day fi">
+          <span class="day-num">Day 2</span>
+          <span class="day-name">Vibe Ideation &amp; Intuitive Hacking</span>
+          <div class="day-row">
+            <span class="row-key">Mindset</span>
+            <span class="row-val">Generative divergence over evaluated convergence.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">Activity</span>
+            <span class="row-val">Using Vibe Coding &mdash; leveraging AI as an <em>augmented brush</em> &mdash; teams rapidly translate Day 1 insights into functional concepts.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">Goal</span>
+            <span class="row-val">To explore a meaningful solution space by building multiple, divergent ideas that address the prioritised problem landscape.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">The Shift</span>
+            <span class="row-val">Replacing rigid specifications with high-velocity, intuitive &ldquo;pokes&rdquo; to the system to see what resonates.</span>
+          </div>
+        </div>
+
+        <div class="day fi">
+          <span class="day-num">Day 3</span>
+          <span class="day-name">Strategic Filtering &amp; The &ldquo;No&rdquo; Discipline</span>
+          <div class="day-row">
+            <span class="row-key">Mindset</span>
+            <span class="row-val">Rigorous discipline in saying no to maintain focus.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">Activity</span>
+            <span class="row-val">We evaluate the Day 2 vibe-concepts against the organisation&rsquo;s Strategic Learning Map and desired impacts.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">Goal</span>
+            <span class="row-val">To kill ideas that dilute focus and select the single direction most likely to heal a Wicked Problem.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">The Shift</span>
+            <span class="row-val">Shifting from a responsive culture that tries to please everyone to a criteria-driven culture of impact.</span>
+          </div>
+        </div>
+
+        <div class="day fi">
+          <span class="day-num">Day 4</span>
+          <span class="day-name">Coded Iteration &amp; Adoption Pressure Tests</span>
+          <div class="day-row">
+            <span class="row-key">Mindset</span>
+            <span class="row-val">Treating early versions as learning instruments, not compromises.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">Activity</span>
+            <span class="row-val">Parallel work-streams. One track iterates on the product prototypes in real code. The second conducts intense adoption tests &mdash; inside the organisation&rsquo;s backend systems and at the client organisation.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">Goal</span>
+            <span class="row-val">To ship a Minimum Learnable Product that is technically viable and operationally ready.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">The Shift</span>
+            <span class="row-val">Moving from polish-first to evidence-driven iteration in real-time.</span>
+          </div>
+        </div>
+
+        <div class="day fi">
+          <span class="day-num">Day 5</span>
+          <span class="day-name">Solution Demo &amp; The Strategic Alignment Meme</span>
+          <div class="day-row">
+            <span class="row-key">Mindset</span>
+            <span class="row-val">Storytelling as a strategic capability.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">Activity</span>
+            <span class="row-val">A formal demo of the coded solutions followed by accelerated storytelling. We use AI to synthesise the week&rsquo;s learnings into a <em>Strategic Meme</em> &mdash; a narrative and visual map for rollout.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">Goal</span>
+            <span class="row-val">To secure buy-in through a coherent story that explains what we believed, what we tried, and how we will anchor this new practice.</span>
+          </div>
+          <div class="day-row">
+            <span class="row-key">The Shift</span>
+            <span class="row-val">Ending organisational amnesia by turning a five-day experience into an aligned, permanent cultural reflex.</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ── CLOSING QUOTE ──────────────────────────── -->
+    <blockquote class="closing-quote fi">
+      Is your organisation ready to stop planning<br>and start practising?
+    </blockquote>
+
+
+    <!-- ── DIVIDER ────────────────────────────────── -->
+    <hr class="rule fi">
+
+
+    <!-- ── CONTACT ────────────────────────────────── -->
+    <section class="section fi">
+      <span class="s-label">Run the Sprint</span>
+      <div class="contact-body">
+        <p>The Five Mindsets Vibe Coding Sprint is available as a standalone engagement or as part of a longer product culture programme. To explore whether it fits your situation, write directly to <a href="mailto:michael@mckayconsulting.dk" class="mail-link">michael@mckayconsulting.dk</a></p>
+      </div>
+    </section>
+
+  </main>
+
+
+  <script>
+    // Scroll-triggered fade-ins via IntersectionObserver
+    (function () {
+      var els = document.querySelectorAll('.fi');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('on'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('on');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.07, rootMargin: '0px 0px -36px 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    }());
+  </script>
+
+</body>
+</html>

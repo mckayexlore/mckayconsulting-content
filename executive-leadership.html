@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regenerative Leadership — McKay Consulting</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─────────────────────────────────────
+       DESIGN TOKENS
+    ───────────────────────────────────── */
+    :root {
+      --bg:          #1a1a18;
+      --text:        #f0ece2;
+      --text-dim:    rgba(240, 236, 226, 0.52);
+      --text-muted:  rgba(240, 236, 226, 0.28);
+      --accent:      #9c8b60;
+      --rule:        rgba(240, 236, 226, 0.09);
+
+      --font-serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --font-mono:   'DM Mono', 'Courier New', monospace;
+
+      --max-w: 680px;
+      --pad-x: clamp(24px, 7vw, 80px);
+      --pad-y: clamp(80px, 13vh, 148px);
+    }
+
+    /* ─────────────────────────────────────
+       RESET
+    ───────────────────────────────────── */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    /* ─────────────────────────────────────
+       BASE
+    ───────────────────────────────────── */
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-serif);
+      font-weight: 300;
+      line-height: 1.92;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* ─────────────────────────────────────
+       GRAIN / TEXTURE OVERLAY
+    ───────────────────────────────────── */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.038;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ─────────────────────────────────────
+       LAYOUT
+    ───────────────────────────────────── */
+    .wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: var(--pad-y) var(--pad-x);
+    }
+
+    /* ─────────────────────────────────────
+       HEADER — initial CSS animation
+    ───────────────────────────────────── */
+    .page-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      font-weight: 300;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 3rem;
+      animation: hdr-fade 1.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    }
+
+    .page-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(2.8rem, 7.5vw, 5.2rem);
+      line-height: 1.06;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      margin-bottom: 1.1rem;
+      animation: hdr-fade 1.8s 0.12s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    }
+
+    .page-subtitle {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.05rem, 2.8vw, 1.35rem);
+      color: var(--text-dim);
+      margin-bottom: 7rem;
+      animation: hdr-fade 1.8s 0.26s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+      line-height: 1.5;
+    }
+
+    @keyframes hdr-fade {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─────────────────────────────────────
+       PROSE
+    ───────────────────────────────────── */
+    p {
+      font-size: clamp(1.05rem, 2.1vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.92;
+      color: var(--text);
+      margin-bottom: 1.65em;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    /* ─────────────────────────────────────
+       SECTION LABELS  (DM Mono caps)
+    ───────────────────────────────────── */
+    .s-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.8rem;
+    }
+
+    /* ─────────────────────────────────────
+       SECTION SPACING
+    ───────────────────────────────────── */
+    .section {
+      margin-bottom: 5.5rem;
+    }
+
+    /* ─────────────────────────────────────
+       THE SINGLE HR DIVIDER
+    ───────────────────────────────────── */
+    .rule {
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin: 5.5rem 0;
+    }
+
+    /* ─────────────────────────────────────
+       SESSIONS
+    ───────────────────────────────────── */
+    .sessions-intro {
+      margin-bottom: 3.5rem;
+    }
+
+    .session {
+      margin-bottom: 3.8rem;
+    }
+
+    .session-num {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.58rem;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.55rem;
+    }
+
+    .session-name {
+      display: block;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-size: clamp(1.15rem, 2.8vw, 1.52rem);
+      line-height: 1.28;
+      color: var(--text);
+      margin-bottom: 0.9rem;
+      letter-spacing: 0.01em;
+    }
+
+    .session p {
+      font-size: clamp(1rem, 1.9vw, 1.1rem);
+      color: var(--text-dim);
+      line-height: 1.88;
+      margin-bottom: 0;
+    }
+
+    /* ─────────────────────────────────────
+       CLOSING QUOTE
+    ───────────────────────────────────── */
+    .closing-quote {
+      display: block;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.25rem, 3.2vw, 1.95rem);
+      line-height: 1.52;
+      color: var(--text);
+      text-align: center;
+      padding: 4.5rem 1rem;
+      letter-spacing: 0.01em;
+      position: relative;
+    }
+
+    .closing-quote::before,
+    .closing-quote::after {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: var(--accent);
+      margin: 1.8rem auto;
+      opacity: 0.45;
+    }
+
+    /* ─────────────────────────────────────
+       ORG NAMES — small-caps emphasis
+    ───────────────────────────────────── */
+    .org {
+      font-variant: small-caps;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─────────────────────────────────────
+       PARTNERS LINE
+    ───────────────────────────────────── */
+    .partners-line {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      line-height: 1.9;
+      margin-top: 2.2rem;
+    }
+
+    /* ─────────────────────────────────────
+       CONTACT
+    ───────────────────────────────────── */
+    .contact-body {
+      margin-top: 0.5rem;
+    }
+
+    .contact-body p {
+      font-size: clamp(0.95rem, 1.9vw, 1.08rem);
+      color: var(--text-dim);
+      line-height: 1.85;
+    }
+
+    .mail-link {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(240, 236, 226, 0.18);
+      transition: border-color 0.4s ease;
+    }
+
+    .mail-link:hover {
+      border-color: var(--accent);
+    }
+
+    /* ─────────────────────────────────────
+       SCROLL FADE-IN
+    ───────────────────────────────────── */
+    .fi {
+      opacity: 0;
+      transform: translateY(26px);
+      transition:
+        opacity  1.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+        transform 1.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .fi.on {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered children inside sessions list */
+    .session.fi:nth-child(1) { transition-delay: 0s; }
+    .session.fi:nth-child(2) { transition-delay: 0.06s; }
+    .session.fi:nth-child(3) { transition-delay: 0.12s; }
+    .session.fi:nth-child(4) { transition-delay: 0.18s; }
+    .session.fi:nth-child(5) { transition-delay: 0.24s; }
+    .session.fi:nth-child(6) { transition-delay: 0.30s; }
+
+    /* ─────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────── */
+    @media (max-width: 580px) {
+      .page-subtitle { margin-bottom: 5rem; }
+      .section       { margin-bottom: 4rem; }
+      .closing-quote { padding: 3rem 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <main class="wrap">
+
+    <!-- ── HEADER ───────────────────────────────── -->
+    <span class="page-label">Private Programme &middot; By Invitation</span>
+    <h1 class="page-title">Regenerative<br>Leadership</h1>
+    <p class="page-subtitle">A Private Executive Programme</p>
+
+
+    <!-- ── THE CONDITION ────────────────────────── -->
+    <section class="section fi">
+      <p>The difficulty is not intelligence. The leaders who come to this programme are among the most capable people in their fields — formed by decades of decision-making in organisations of genuine complexity, in conditions that demanded both rigour and nerve. The organisations they lead are, in many cases, masterpieces of a particular kind: built through generations to find the right path through difficult terrain, to analyse and act on what is understood, to compound expertise over time. The complexity theorist Dave Snowden calls this the Complicated domain. Most large established organisations were built to excel there. For a long time, that was the correct ambition.</p>
+
+      <p>What these leaders are navigating now belongs to a different category entirely. Technological discontinuity does not resolve through expert analysis. Geopolitical disruption does not yield to planning cycles. New competitors arrive without warning, built on different physics entirely. The terrain has moved — into what Snowden identifies as the Complex, where patterns emerge only through interaction with the environment, not through analysis of the map; and for moments at a time, into the Chaotic, where the old stable ground may not return. The tools that built these organisations, the tools still in use, still instinctive, are not wrong. They are being applied to the wrong domain. This is the source of decision paralysis. Not incompetence. Not failure of nerve.</p>
+
+      <p>For those who carry a family legacy across generations, there is a further dimension. The question is no longer simply strategic. At its root, it is a question of identity.</p>
+    </section>
+
+
+    <!-- ── THE SETTING ───────────────────────────── -->
+    <section class="section fi">
+      <span class="s-label">The Setting</span>
+      <p>This programme convenes a small, carefully selected group — twelve to fourteen leaders at equivalent seniority — for a multi-day residential offsite in a setting chosen specifically for its remove from the ordinary. High-altitude mountain villages. Working estates. Remote island locations. Historic institutions of genuine intellectual gravity. The criterion is always the same: a place where the weight of normal routine cannot follow you in, and where the quality of attention that becomes possible is different in kind.</p>
+
+      <p>There are no observers. No press. No attribution of any kind. The conversations that take place here remain inside the room.</p>
+
+      <p>Attendance is by invitation or direct introduction only.</p>
+    </section>
+
+
+    <!-- ── THE PROGRAMME ─────────────────────────── -->
+    <section class="section">
+      <span class="s-label fi">The Programme</span>
+
+      <p class="sessions-intro fi">Over the course of several days, the programme moves through six areas of work. Each is designed to build on the last — not as a module sequence, but as a deepening.</p>
+
+      <div>
+
+        <div class="session fi">
+          <span class="session-num">I</span>
+          <span class="session-name">Situational Awareness</span>
+          <p>Most organisations are navigating by the regulatory and competitive scaffolding that surrounds the actual terrain — not the terrain itself. One of the most consequential errors a leader can make is to treat a Complex or Chaotic situation as if it were merely Complicated: to reach for analysis and expertise when the territory demands probing, sensing, and responding to what emerges. This session works to strip away the abstraction and see the battlefield clearly — who is genuinely gaining ground, what forces are actually operative, and which kind of territory each challenge actually represents.</p>
+        </div>
+
+        <div class="session fi">
+          <span class="session-num">II</span>
+          <span class="session-name">The Neuroscience of Habitual Decision-Making</span>
+          <p>The patterns that built successful organisations were expensive to develop and are, by definition, automatic. They were also calibrated to a specific kind of environment — one where expertise and analysis led reliably toward the right answer. When the domain shifts, the very behaviours that served so well become the primary obstacles. This session names the neurological mechanism — not to dissolve what was built, but to create the internal conditions from which genuinely different choices become available.</p>
+        </div>
+
+        <div class="session fi">
+          <span class="session-num">III</span>
+          <span class="session-name">The Weight of Legacy</span>
+          <p>For those who lead companies carrying a family inheritance across generations, transformation is never merely strategic. There is a burden of loyalty to what was built, and a fear — rarely given language, rarely shared — of being the steward at the moment it failed to hold. This session creates the space to name that experience honestly, in the company of peers who share it.</p>
+        </div>
+
+        <div class="session fi">
+          <span class="session-num">IV</span>
+          <span class="session-name">What Startups Know That You Don't &mdash; and Vice Versa</span>
+          <p>This is not an exercise in admiration of the new, nor a defence of the established enterprise. It is a bilateral exchange, conducted with honesty on both sides: what genuinely moves with greater speed in smaller organisations, what genuinely holds more value at scale, and where the assumptions of each are demonstrably wrong. The exchange requires a willingness to be changed by it.</p>
+        </div>
+
+        <div class="session fi">
+          <span class="session-num">V</span>
+          <span class="session-name">The Generative Voice</span>
+          <p>The quality of the questions a leader asks shapes the quality of what becomes possible in every room around them. Drawing on practices from musical improvisation and ensemble creativity — and in particular the approach Jacob Collier has articulated for building harmonic structures that invite rather than demand — this session develops the capacity to ask questions that produce movement rather than resistance.</p>
+        </div>
+
+        <div class="session fi">
+          <span class="session-num">VI</span>
+          <span class="session-name">New Tools for Ongoing Clarity</span>
+          <p>The programme closes with a set of practical disciplines that participants carry forward and use: contemplative, somatic, and structured decision-making practices, selected for their utility in conditions like these. Not a toolkit. A selection of approaches that work — and that remain available long after the room empties.</p>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ── OUTCOME ────────────────────────────────── -->
+    <section class="section fi">
+      <span class="s-label">What Participants Take Away</span>
+      <p>Participants leave this programme not with answers — the answers must be earned in the months and years that follow — but with something arguably more valuable: the capacity to inhabit a generative posture. A clearer reading of the actual situation, as distinct from the scaffolding that surrounds it. New language for the conversations that matter most — with boards, with families, with the next generation of leadership — that is honest about the difficulty and alive to what remains possible. The movement from managed decline to regenerative agency is not a single event. But it can begin in a room like this one, among people willing to be honest about what the moment actually demands.</p>
+    </section>
+
+
+    <!-- ── CLOSING QUOTE ──────────────────────────── -->
+    <blockquote class="closing-quote fi">
+      &ldquo;Now I see my own context and myself with new eyes &mdash; and I am not afraid.&rdquo;
+    </blockquote>
+
+
+    <!-- ── DIVIDER ────────────────────────────────── -->
+    <hr class="rule fi">
+
+
+    <!-- ── MICHAEL McKAY ─────────────────────────── -->
+    <section class="section fi">
+      <span class="s-label">Michael McKay</span>
+
+      <p>Over more than two decades, Michael McKay has occupied roles inside organisations at moments of acute technology and cultural discontinuity. He was inside <span class="org">Nokia</span> during its pivotal decade of reckoning. At <span class="org">Amazon</span> during the years Jeff Bezos and his leadership team were forging the culture of operational invention and long-term thinking that would define the company. At <span class="org">eBay</span> during John Donahoe&rsquo;s tenure as Chief Executive. He has worked in close proximity to the founders and early leadership of companies — among them Brian Chesky and the team at <span class="org">Airbnb</span> — who were reshaping the assumptions of established industries. He has held senior roles at <span class="org">PayPal</span>, <span class="org">&#216;rsted</span>, and <span class="org">Novo Nordisk R&amp;D</span>.</p>
+
+      <p>His practice integrates design thinking, product culture, and human-centred leadership — not as consultancy methodology, but as disciplines formed in the rooms where these decisions were actually made.</p>
+
+      <span class="partners-line">
+        Co-developed with Manuel Toscano
+      </span>
+    </section>
+
+
+    <!-- ── CONTACT ────────────────────────────────── -->
+    <section class="section fi">
+      <span class="s-label">Entry</span>
+      <div class="contact-body">
+        <p>This programme is available by introduction. If you would like to explore whether it is right for your situation, write directly to <a href="mailto:michael@mckayconsulting.dk" class="mail-link">michael@mckayconsulting.dk</a></p>
+      </div>
+    </section>
+
+  </main>
+
+
+  <script>
+    // Scroll-triggered fade-ins via IntersectionObserver
+    (function () {
+      var els = document.querySelectorAll('.fi');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('on'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('on');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.07, rootMargin: '0px 0px -36px 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    }());
+  </script>
+
+</body>
+</html>
