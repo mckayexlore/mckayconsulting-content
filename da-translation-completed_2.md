@@ -1,7 +1,13 @@
 # McKay Consulting — Danish Translation File
 # Instructions: Fill in the DA column for each string. Leave EN as-is.
 # When complete, hand back to Claude for re-embedding into page 600 (DA version).
-# Sections follow the order they appear on the page.
+# Sections follow the order they appear on the page (updated March 2026: MANIFESTO moved after ABOUT).
+#
+# MANIFESTO/OUR APPROACH PAGES (created March 2026):
+#   EN: /our-approach/ — Page ID 927
+#   DA: /da/vores-tilgang/ — Page ID 928
+#   Hero image: Gemini_Generated_Image_ig91dmig91dmig91.png (Media ID 912)
+#   Positioning image: /wp-content/uploads/2026/03/2x2mckayconsulting.png
 
 ---
 
@@ -14,17 +20,6 @@
 | hero_sub | Design-led transformation for organisations ready to build cultures that innovate faster and care deeper. | Silicon Valley speed — met with Scandinavian respect for people, trust and wellbeing. |  | Silicon Valley-hastighed — mødt med skandinavisk respekt for mennesker, tillid og trivsel. |  |
 | hero_cta | Let's talk → | Let's talk → |  | Kontakt os → |  |
 | hero_brand_line | 25 years of design leadership inside | 25 years inside corporate innovation and product design |  | 25 års erfaring inden for corporate innovation og produktdesign |  |
-
----
-
-## MANIFESTO
-
-| Key | EN | EN_NEW | EN_SHORT | DA | DA_SHORT |
-|-----|----|----|------|------|------|
-| manifesto_label |  | Our belief |  | Vores overbevisning |  |
-| manifesto_h2 |  | Fast or caring? We think that's the wrong question. | Fast or caring? That's the wrong question. | Hurtigt eller omsorgsfuldt? Det er det forkerte spørgsmål. | Hurtigt eller omsorgsfuldt? Forkert spørgsmål. |
-| manifesto_para |  | There's a prevailing idea that you have to choose: either move fast, experiment hard, and disrupt with force — or build on consensus, protect wellbeing, and keep everyone on board. We think that's a false choice. The strongest product cultures we've seen do both. Silicon Valley pace and Scandinavian trust don't cancel each other out — they reinforce each other. That's what McKay Consulting is built on. | Fast or caring? We think that's the wrong question. The best organisations do both — and move faster because of it. | Der er opstået en idé om at man skal vælge: enten køre stærkt, eksperimentere med ødelæggende kraft og disrufte — eller bygge på konsensus, beskytte trivslen og holde alle med. Vi mener det er et falsk valg. De stærkeste produktkulturer vi har set gør begge dele. Silicon Valley-tempo og skandinavisk tillid udelukker ikke hinanden — de forstærker hinanden. Det er det McKay Consulting er bygget på. | Hurtigt eller omsorgsfuldt? Det er det forkerte spørgsmål. De bedste organisationer gør begge dele — og bevæger sig hurtigere af den grund. |
-| manifesto_cta |  | Read more about our approach → |  | Læs mere om vores tilgang → |  |
 
 ---
 
@@ -52,6 +47,19 @@
 | about_para_1 | For 25 years I've worked inside some of the world's most ambitious organisations — PayPal, Amazon, Nokia, LEGO, Novo Nordisk — not as an outside advisor, but as a practitioner leading real teams through real transformation. | Throughout my career I've worked inside some of the world's most ambitious organisations — PayPal, Amazon, Nokia, LEGO, Novo Nordisk — across product design and innovation at every level: from hands-on development to strategy, organisational change and transformation leadership. I've built and led teams and departments across industries. |  | I min karriere indtil nu har jeg arbejdet indefra i nogle af verdens mest ambitiøse organisationer — PayPal, Amazon, Nokia, LEGO, Novo Nordisk — med produktdesign og innovation på alle niveauer: fra hands-on udviklingsarbejde til strategiudvikling, organisatorisk forandring og transformationsledelse. Jeg har bygget og ledet teams og afdelinger på tværs af industrier. |  |
 | about_para_2 | My work sits at the intersection of design, strategy, and culture. I help executive teams get clear on where they're going, equip their people to get there, and build the capability to keep going long after I leave. | Over the past 15 years I've moved between senior leadership roles inside organisations undergoing major change, and building my own consulting and advisory practice. With me you get a corporate-seasoned leader with strong, battle-tested methods for radical change from within. |  | De seneste 15 år har jeg vekslet mellem senior ledelsesroller i organisationer under stor forandring og min egen konsulent- og rådgivervirksomhed. Med mig får I en corporate erfaren leder med stærke, velafprøvede metoder til radikal forandring indefra. |  |
 | about_para_3 | Everything I do is grounded in two frameworks refined over decades: the Five Mindsets of Innovation and a Digital Product Operating Model built on Silicon Valley product principles, adapted for the realities of large organisations. | Over time I've become increasingly focused on one question: how do we build cultures that genuinely value and accelerate human talent — so we can create the solutions that matter most right now? That pragmatism and that vision is what drives me, and what drives McKay Consulting. |  | Med tiden er jeg blevet mere og mere optaget af ét spørgsmål: hvordan bygger vi kulturer, der virkelig værdsætter og accelererer menneskeligt talent — så vi kan skabe de løsninger, der er så vigtige for os som menneskehed at få på banen nu og her? Den pragmatisme og den vision driver mig — og driver McKay Consulting. |  |
+
+---
+
+## MANIFESTO
+# Home page teaser — links to /our-approach/ (EN) and /da/vores-tilgang/ (DA)
+# Full content lives on the dedicated Our Approach / Vores tilgang pages (IDs 927/928)
+
+| Key | EN | EN_NEW | EN_SHORT | DA | DA_SHORT |
+|-----|----|----|------|------|------|
+| manifesto_label |  | Our belief |  | Vores overbevisning |  |
+| manifesto_h2 |  | Fast or caring? We think that's the wrong question. | Fast or caring? That's the wrong question. | Hurtigt eller omsorgsfuldt? Det er det forkerte spørgsmål. | Hurtigt eller omsorgsfuldt? Forkert spørgsmål. |
+| manifesto_para |  | There's a prevailing idea that you have to choose: either move fast, experiment hard, and disrupt with force — or build on consensus, protect wellbeing, and keep everyone on board. We think that's a false choice. The strongest product cultures we've seen do both. Silicon Valley pace and Scandinavian trust don't cancel each other out — they reinforce each other. That's what McKay Consulting is built on. | The best organisations do both — and move faster because of it. | Der er opstået en idé om at man skal vælge: enten køre stærkt, eksperimentere med ødelæggende kraft og disrufte — eller bygge på konsensus, beskytte trivslen og holde alle med. Vi mener det er et falsk valg. De stærkeste produktkulturer vi har set gør begge dele. Silicon Valley-tempo og skandinavisk tillid udelukker ikke hinanden — de forstærker hinanden. Det er det McKay Consulting er bygget på. | Hurtigt eller omsorgsfuldt? Det er det forkerte spørgsmål. De bedste organisationer gør begge dele — og bevæger sig hurtigere af den grund. |
+| manifesto_cta |  | Read more about our approach → /our-approach/ |  | Læs mere om vores tilgang → /da/vores-tilgang/ |  |
 
 ---
 
