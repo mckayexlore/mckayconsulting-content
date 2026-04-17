@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--
+    ══════════════════════════════════════════════════════
+    EMBEDDABLE COMPONENT: .tools-section
+    ──────────────────────────────────────────────────────
+    Extract everything between COMPONENT BEGIN / END,
+    add the <style> block to theme CSS or a <style> in
+    the page <head>. Arrow-nav JS goes before </body>.
+    ══════════════════════════════════════════════════════
+  -->
+  <title>Strategic Tools — McKay Consulting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=DM+Mono:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─────────────────────────────────────
+       DESIGN TOKENS  (mirror main site)
+    ───────────────────────────────────── */
+    :root {
+      --bg:          #1a1a18;
+      --text:        #f0ece2;
+      --text-dim:    rgba(240, 236, 226, 0.52);
+      --text-muted:  rgba(240, 236, 226, 0.28);
+      --accent:      #9c8b60;
+      --accent-rust: #8b4c3c;
+      --rule:        rgba(240, 236, 226, 0.09);
+      --card-bg:     rgba(240, 236, 226, 0.04);
+      --card-hover:  rgba(240, 236, 226, 0.075);
+
+      --font-serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+      --font-mono:   'DM Mono', 'Courier New', monospace;
+
+      --pad-x: clamp(24px, 6vw, 72px);
+    }
+
+    /* ─────────────────────────────────────
+       PAGE BASE
+    ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-serif);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+    }
+
+    /* ─────────────────────────────────────
+       GRAIN TEXTURE
+    ───────────────────────────────────── */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.038;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ─────────────────────────────────────
+       PAGE WRAPPER  (remove when embedding)
+    ───────────────────────────────────── */
+    .page-ctx {
+      padding: clamp(80px, 12vh, 140px) 0 clamp(80px, 12vh, 140px);
+    }
+
+    /* ══════════════════════════════════════════
+       COMPONENT BEGIN — embed from here
+    ═══════════════════════════════════════════ */
+
+    /* ─────────────────────────────────────
+       SECTION HEADER
+    ───────────────────────────────────── */
+    .tools-header {
+      padding: 0 var(--pad-x);
+      max-width: 780px;
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+
+    .tools-label {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 0.63rem;
+      font-weight: 300;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.4rem;
+    }
+
+    .tools-h2 {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 1.4rem;
+    }
+
+    .tools-intro {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(1rem, 2.1vw, 1.15rem);
+      line-height: 1.88;
+      color: var(--text-dim);
+      max-width: 580px;
+      margin-bottom: 1.2rem;
+    }
+
+    .tools-cta-line {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.1rem);
+      color: var(--text-dim);
+    }
+
+    .tools-cta-link {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(156, 139, 96, 0.35);
+      transition: border-color 0.38s ease, color 0.38s ease;
+      padding-bottom: 1px;
+    }
+
+    .tools-cta-link:hover {
+      color: var(--text);
+      border-color: rgba(240, 236, 226, 0.35);
+    }
+
+    /* ─────────────────────────────────────
+       CAROUSEL ROWS  (Netflix layout)
+    ───────────────────────────────────── */
+    .tools-section {
+      /* vertical stack of rows; overflow-y visible so both rows sit on page */
+      display: flex;
+      flex-direction: column;
+      gap: clamp(2.8rem, 5vw, 4.5rem);
+    }
+
+    .carousel-row {
+      position: relative;
+    }
+
+    /* Row label + chevrons */
+    .row-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      padding: 0 var(--pad-x);
+      margin-bottom: 1.4rem;
+    }
+
+    .row-label {
+      font-family: var(--font-mono);
+      font-size: 0.67rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .row-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+      align-self: center;
+    }
+
+    .row-nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-btn {
+      background: none;
+      border: 1px solid var(--rule);
+      color: var(--text-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      transition: border-color 0.3s ease, color 0.3s ease;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .nav-btn:hover {
+      border-color: rgba(240, 236, 226, 0.28);
+      color: var(--text);
+    }
+
+    /* ─────────────────────────────────────
+       SCROLL TRACK
+    ───────────────────────────────────── */
+    .carousel-track {
+      display: flex;
+      gap: clamp(14px, 2vw, 20px);
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding: 0 var(--pad-x);
+      /* Right padding creates breathing room past last card */
+      padding-right: calc(var(--pad-x) + 40px);
+    }
+
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Fade-out on right edge to hint scrollability */
+    .carousel-row::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: clamp(40px, 6vw, 72px);
+      height: 100%;
+      background: linear-gradient(to right, transparent, var(--bg));
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* ─────────────────────────────────────
+       TOOL CARDS
+    ───────────────────────────────────── */
+    .tool-card {
+      flex: 0 0 clamp(260px, 36vw, 360px);
+      scroll-snap-align: start;
+      background: var(--card-bg);
+      border: 1px solid var(--rule);
+      padding: clamp(1.6rem, 3vw, 2.2rem) clamp(1.4rem, 2.5vw, 2rem);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      position: relative;
+      transition:
+        background 0.42s ease,
+        border-color 0.42s ease,
+        transform 0.42s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .tool-card:hover {
+      background: var(--card-hover);
+      border-color: rgba(240, 236, 226, 0.18);
+      transform: translateY(-3px);
+    }
+
+    .tool-card:focus-visible {
+      outline: 1px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Card meta / type tag */
+    .card-type {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .card-tag {
+      font-family: var(--font-mono);
+      font-size: 0.57rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .card-meta {
+      font-family: var(--font-mono);
+      font-size: 0.55rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* Card title */
+    .card-title {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(1.35rem, 3vw, 1.75rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    /* Card description */
+    .card-desc {
+      font-family: var(--font-serif);
+      font-weight: 300;
+      font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+      line-height: 1.78;
+      color: var(--text-dim);
+      flex: 1;
+      margin-bottom: 1.6rem;
+    }
+
+    /* Card CTA */
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(0.92rem, 1.7vw, 1rem);
+      color: var(--text-dim);
+      transition: color 0.38s ease;
+    }
+
+    .tool-card:hover .card-cta {
+      color: var(--text);
+    }
+
+    .card-arrow {
+      display: inline-block;
+      font-style: normal;
+      transition: transform 0.38s ease;
+    }
+
+    .tool-card:hover .card-arrow {
+      transform: translateX(5px);
+    }
+
+    /* ─────────────────────────────────────
+       COMING SOON CARD  (ghost variant)
+    ───────────────────────────────────── */
+    .tool-card--coming {
+      border-style: dashed;
+      background: transparent;
+      cursor: default;
+    }
+
+    .tool-card--coming:hover {
+      background: rgba(240, 236, 226, 0.025);
+      border-color: rgba(240, 236, 226, 0.13);
+      transform: none;
+    }
+
+    .tool-card--coming .card-tag {
+      color: var(--text-muted);
+    }
+
+    .tool-card--coming .card-title {
+      color: var(--text-dim);
+    }
+
+    .tool-card--coming .card-cta {
+      color: var(--text-muted);
+    }
+
+    .tool-card--coming:hover .card-cta {
+      color: var(--text-dim);
+    }
+
+    .tool-card--coming:hover .card-arrow {
+      transform: none;
+    }
+
+    /* ─────────────────────────────────────
+       SCROLL FADE-IN
+    ───────────────────────────────────── */
+    .fi {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity  1.4s cubic-bezier(0.22, 0.61, 0.36, 1),
+        transform 1.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    .fi.on { opacity: 1; transform: translateY(0); }
+    .fi[data-delay="1"] { transition-delay: 0.08s; }
+    .fi[data-delay="2"] { transition-delay: 0.16s; }
+
+    /* ══════════════════════════════════════════
+       COMPONENT END
+    ═══════════════════════════════════════════ */
+
+  </style>
+</head>
+
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="page-ctx">
+
+    <!-- ══════════════════════════════════════════
+         COMPONENT BEGIN — embed this in WordPress
+    ═══════════════════════════════════════════ -->
+
+    <!-- Section header -->
+    <header class="tools-header fi">
+      <span class="tools-label">Strategic Tools</span>
+      <h2 class="tools-h2">Tools for transformation<br>and strategic design work</h2>
+      <p class="tools-intro">We develop our own diagnostic and decision tools — built from patterns in real transformation work, not textbook models. Each tool is designed to be used, not archived. We share them openly because the thinking sharpens when more practitioners test it against real situations.</p>
+      <p class="tools-cta-line">Building something where this would be useful? <a class="tools-cta-link" href="#">Tell us about it →</a></p>
+    </header>
+
+    <!-- Carousel rows -->
+    <div class="tools-section">
+
+      <!-- ── Row 1: Assessments ──────────────────────── -->
+      <div class="carousel-row fi" data-delay="1">
+        <div class="row-header">
+          <span class="row-label">Assessments</span>
+          <span class="row-rule" aria-hidden="true"></span>
+          <div class="row-nav" role="group" aria-label="Assessments navigation">
+            <button class="nav-btn" data-track="track-assessments" data-dir="-1" aria-label="Scroll left">&#8592;</button>
+            <button class="nav-btn" data-track="track-assessments" data-dir="1"  aria-label="Scroll right">&#8594;</button>
+          </div>
+        </div>
+
+        <div class="carousel-track" id="track-assessments">
+
+          <!-- Card: Product Culture Assessment -->
+          <a class="tool-card" href="#" aria-label="Product Culture Assessment">
+            <div class="card-type">
+              <span class="card-tag">Assessment</span>
+              <span class="card-meta">14 dimensions &middot; 8 min</span>
+            </div>
+            <h3 class="card-title">Product Culture Assessment</h3>
+            <p class="card-desc">Measure how your organisation is set up to make and operate meaningful products. Pinpoint gaps, align leadership, and walk away with a personalised Culture Map you can act on immediately.</p>
+            <span class="card-cta">Take the assessment <span class="card-arrow">→</span></span>
+          </a>
+
+          <!-- Card: Four Cultures Assessment -->
+          <a class="tool-card" href="#" aria-label="Four Cultures Assessment">
+            <div class="card-type">
+              <span class="card-tag">Assessment</span>
+              <span class="card-meta">Culture mapping</span>
+            </div>
+            <h3 class="card-title">Four Cultures Assessment</h3>
+            <p class="card-desc">Identify which of the four culture archetypes dominates your organisation today — and what that means for product work, leadership style, and the shape of change that will actually land.</p>
+            <span class="card-cta">Take the assessment <span class="card-arrow">→</span></span>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- ── Row 2: Decision Support Tools ──────────── -->
+      <div class="carousel-row fi" data-delay="2">
+        <div class="row-header">
+          <span class="row-label">Decision Support Tools</span>
+          <span class="row-rule" aria-hidden="true"></span>
+          <div class="row-nav" role="group" aria-label="Decision Support Tools navigation">
+            <button class="nav-btn" data-track="track-decisions" data-dir="-1" aria-label="Scroll left">&#8592;</button>
+            <button class="nav-btn" data-track="track-decisions" data-dir="1"  aria-label="Scroll right">&#8594;</button>
+          </div>
+        </div>
+
+        <div class="carousel-track" id="track-decisions">
+
+          <!-- Card: Decision Weighted Matrix Flow -->
+          <a class="tool-card" href="#" aria-label="Decision Weighted Matrix Flow">
+            <div class="card-type">
+              <span class="card-tag">Decision Support</span>
+              <span class="card-meta">Facilitated flow</span>
+            </div>
+            <h3 class="card-title">Decision Weighted Matrix Flow</h3>
+            <p class="card-desc">A structured tool for making high-stakes strategic choices when multiple criteria, stakeholders, and trade-offs are in play. Surfaces hidden assumptions and turns debate into a decision.</p>
+            <span class="card-cta">Open the tool <span class="card-arrow">→</span></span>
+          </a>
+
+          <!-- Card: Coming Soon -->
+          <div class="tool-card tool-card--coming" role="img" aria-label="More tools coming soon">
+            <div class="card-type">
+              <span class="card-tag">Coming soon</span>
+            </div>
+            <h3 class="card-title">More tools in development</h3>
+            <p class="card-desc">We build new tools when a repeated pattern in client work calls for something better than what exists. If you are navigating a situation where a structured tool would help, we want to hear about it.</p>
+            <span class="card-cta">Tell us what you need <span class="card-arrow">→</span></span>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <!-- end .tools-section -->
+
+    <!-- ══════════════════════════════════════════
+         COMPONENT END
+    ═══════════════════════════════════════════ -->
+
+  </div>
+
+  <script>
+    /* ── Scroll-fade-in ───────────────────────────── */
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fi').forEach(el => io.observe(el));
+
+    /* ── Carousel arrow nav ───────────────────────── */
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const track = document.getElementById(btn.dataset.track);
+        const card  = track.querySelector('.tool-card');
+        const step  = (card ? card.offsetWidth + 20 : 300) * parseInt(btn.dataset.dir, 10);
+        track.scrollBy({ left: step, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
